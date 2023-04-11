@@ -2,3 +2,6 @@ pandas
 xgboost
 seaborn
 plotly
+missingno
+jupyter
+scikit-learn
