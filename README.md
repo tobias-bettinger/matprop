@@ -24,3 +24,5 @@ And the Yield Strength as the target value that should be predicted by an AI mod
 You can find two Jupyter Notebooks in this repository that lead you through parts of the AI Lifecycle:
 + 01_matprop_data_exploration.ipynb
 + 02_matprop_training.ipynb
+
+![AI Lifecycle](ai_lifecycle.png)
