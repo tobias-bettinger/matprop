@@ -32,6 +32,9 @@ class SteelStrengthLoader:
     def get_features(self):
         return self._csv_dataframe[self.feature_names]
 
+    def get_dataset_as_dataframe(self):
+        return self._csv_dataframe.copy()
+
     def load(self, csv_filename=''):
         self._csv_dataframe = pd.read_csv(csv_filename, sep=',', header=0)
         self._csv_dataframe.rename({'yield strength': 'yield_strength',
