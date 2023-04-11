@@ -35,10 +35,17 @@ class TensileStrengthMeasurements:
     def get_dataset_as_dataframe(self):
         return self._csv_dataframe.copy()
 
-    def load(self, csv_filename=''):
-        self._csv_dataframe = pd.read_csv(csv_filename, sep=',', header=0)
-        self._csv_dataframe.rename({'yield strength': 'yield_strength',
-                                    'tensile strength': 'tensile_strength'}, axis='columns', inplace=True)
+    def load(self, csv_filename='', parquet_filename=''):
+        if csv_filename != '':
+            self._csv_dataframe = pd.read_csv(csv_filename, sep=',', header=0)
+            self._csv_dataframe.rename({'yield strength': 'yield_strength',
+                                        'tensile strength': 'tensile_strength'}, axis='columns', inplace=True)
+        elif parquet_filename != '':
+            self._csv_dataframe = pd.read_parquet(parquet_filename)
+
+        else:
+            raise Exception(f'Something went wrong loading either the csv file or the parquet file! Please provide only one!')
+
         self.formula = self._csv_dataframe['formula']
         self.c = self._csv_dataframe['c']
         self.mn = self._csv_dataframe['mn']
