@@ -4,7 +4,7 @@ import plotly.express as px
 import plotly.io as pio
 
 
-class SteelStrengthLoader:
+class TensileStrengthMeasurements:
     def __init__(self):
         self._csv_dataframe = None
         self.formula: pd.Series
@@ -81,34 +81,3 @@ class SteelStrengthLoader:
 
     def get_column_names(self):
         return self._csv_dataframe.columns
-
-    def scatter(self, x='yield_strength', y=''):
-        fig = px.scatter(self._csv_dataframe, x=x, y=y, template='plotly_dark')
-        fig.show()
-
-    def scatter_matrix(self, variable_space: list):
-        fig = px.scatter_matrix(self._csv_dataframe, dimensions=variable_space, template='plotly_dark')
-        fig.show()
-
-    def distplot(self, variable_space: list):
-        pass
-
-    def parallel_coords(self, variable_space: list):
-        if len(variable_space) < 1:
-            plotvars = self.feature_names.copy()
-
-        else:
-            plotvars = variable_space
-
-        plotvars.append('yield_strength')
-        print(plotvars)
-        fig = px.parallel_categories(self._csv_dataframe[plotvars], color='yield_strength',
-                                     color_continuous_scale=px.colors.sequential.Inferno,
-                                     template='plotly_dark')
-        fig.show()
-
-    def box_all(self):
-        _df = self._csv_dataframe.copy()
-        _df_prepped = _df[self.feature_names].T
-        fig = px.box(self._csv_dataframe, x="time", y="total_bill", points="all")
-        fig.show()
